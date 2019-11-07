@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it313.big.modules.sys.dao.RoleDao">
+    
+    <resultMap id="roleResult" type="Role">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="org.id" column="org.id" />
+		<result property="org.name" column="org.name" />
+		<result property="enname" column="enname" />
+		<result property="roleType" column="roleType" />
+		<result property="dataScope" column="dataScope" />
+		<result property="remarks" column="remarks" />
+		<result property="state" column="state" />
+		<result property="sysData" column="sysData" /><!-- 
+		<collection property="userList" ofType="User">
+			<id property="id" column="userList.id" />
+			<id property="loginName" column="userList.loginName" />
+			<id property="name" column="userList.name" />
+			<id property="email" column="userList.email" />
+			<id property="phone" column="userList.phone" />
+			<id property="mobile" column="userList.mobile" />
+			<id property="org.name" column="userList.org.name" />
+			<id property="company.name" column="userList.company.name" />
+		</collection> -->
+		<collection property="menuList" ofType="Menu">
+			<id property="id" column="menuList.id" />
+		</collection>
+		<collection property="orgList" ofType="Org">
+			<id property="id" column="orgList.id" />
+		</collection>
+	</resultMap>
+	
+    <sql id="roleColumns">
+    	a.id,
+    	a.org_id AS "org.id",
+    	a.name,
+    	a.enname,
+    	a.role_type AS roleType,
+		a.data_scope AS dataScope,
+		a.remarks,
+		a.create_by AS "createBy.id",
+		a.create_time,
+		a.update_by AS "updateBy.id",
+		a.update_time,
+		a.del_flag,
+    	o.name AS "org.name",
+    	o.code,
+    	a.state AS state,
+    	a.is_sys AS sysData
+    </sql>
+    
+	<select id="get" resultMap="roleResult">
+		SELECT
+			<include refid="roleColumns"/>,<!-- 
+			ur.user_id AS "userList.id",
+			u.login_name AS "userList.loginName",
+			u.name AS "userList.name",
+			u.email AS "userList.email",
+			u.phone AS "userList.phone",
+			u.mobile AS "userList.mobile",
+			uc.name AS "userList.company.name",
+			uo.name AS "userList.org.name", -->
+			rm.menu_id AS "menuList.id",
+			ro.org_id AS "orgList.id"
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role a
+		JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_org o ON o.id = a.org_id<!-- 
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_user_role ur ON ur.role_id = a.id
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_user u ON u.id = ur.user_id
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_org uc ON uc.id = u.company_id
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_org uo ON uo.id = u.org_id -->
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role_menu rm ON rm.role_id = a.id
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role_org ro ON ro.role_id = a.id
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="getByName" resultType="Role">
+		SELECT
+			<include refid="roleColumns"/>
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role a
+		JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_org o ON o.id = a.org_id
+		WHERE a.name = #{name} AND a.del_flag = #{DEL_FLAG_NORMAL}
+	</select>
+	
+	<select id="getByEnname" resultType="Role">
+		SELECT
+			<include refid="roleColumns"/>
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role a
+		JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_org o ON o.id = a.org_id
+		WHERE a.enname = #{enname} AND a.del_flag = #{DEL_FLAG_NORMAL}
+	</select>
+	
+	<select id="findList" resultMap="roleResult">
+		SELECT <!-- DISTINCT -->
+			<include refid="roleColumns"/>,
+			ro.org_id AS "orgList.id",sd.label as dataScopeLab
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role a
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_org o ON o.id = a.org_id
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_user_role ur ON ur.role_id = a.id
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_user u ON u.id = ur.user_id
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role_org ro ON ro.role_id = a.id
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_dict sd on a.data_scope=sd.value and sd.type='sys_data_scope'
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.state=#{state}
+		<if test="user != null and user.id != null and user.id != ''">
+			AND u.id = #{user.id}
+		</if>
+		<if test="name != null and name != null and name != ''">
+			AND a.name like #{name}
+		</if>
+		<if test="org != null and org.id != null and org.id != ''">
+			AND a.org_id = #{org.id}
+		</if>
+		<if test="org != null and org.leftValue != null and org.leftValue != ''">
+			AND o.left_value &gt;= #{org.leftValue}
+		</if>
+		<if test="org != null and org.rightValue != null and org.rightValue != ''">
+			AND o.right_value &lt;= #{org.rightValue}
+		</if>
+		<if test="user != null and user.loginName != null and user.loginName != ''">
+			AND u.login_name = #{user.loginName}
+		</if>
+		<!-- 数据范围过滤 -->
+		${sqlMap.dsf}
+		ORDER BY o.code, a.name
+	</select>
+	
+	<select id="findAllList" resultType="Role">
+		SELECT
+			<include refid="roleColumns"/>,sd.label as dataScopeLab
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role a
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_org o ON o.id = a.org_id
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_dict sd on a.data_scope=sd.value and sd.type='sys_data_scope'
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		<if test="name != null and name != null and name != ''">
+			AND a.name like #{name}
+		</if>
+		<if test="org != null and org.id != null and org.id != ''">
+			AND a.org_id = #{org.id}
+		</if>
+		<if test="org != null and org.leftValue != null and org.leftValue != ''">
+			AND o.left_value &gt;= #{org.leftValue}
+		</if>
+		<if test="org != null and org.rightValue != null and org.rightValue != ''">
+			AND o.right_value &lt;= #{org.rightValue}
+		</if>
+		ORDER BY o.code, a.name
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role(
+			id, 
+			org_id, 
+			name, 
+			enname, 
+			role_type, 
+			data_scope, 
+			create_by, 
+			create_time, 
+			update_by, 
+			update_time, 
+			remarks, 
+			del_flag,
+			is_sys,
+			state
+		) VALUES (
+			#{id}, 
+			#{org.id}, 
+			#{name}, 
+			#{enname}, 
+			#{roleType}, 
+			#{dataScope}, 
+			#{createBy.id}, 
+			#{createTime}, 
+			#{updateBy.id}, 
+			#{updateTime}, 
+			#{remarks}, 
+			#{delFlag},
+			#{sysData},
+			#{state}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role SET 
+			org_id = #{org.id}, 
+			name = #{name}, 
+			enname = #{enname}, 
+			role_type = #{roleType}, 
+			data_scope = #{dataScope}, 
+			update_by = #{updateBy.id}, 
+			update_time = #{updateTime}, 
+			remarks = #{remarks},
+			is_sys = #{sysData},
+			state = #{state}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteRoleMenu">
+		DELETE FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role_menu WHERE role_id = #{id}
+	</delete>
+	
+	<insert id="insertRoleMenu">
+		INSERT INTO ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role_menu(role_id, menu_id)
+		<foreach collection="menuList" item="menu" separator=" union all ">
+			SELECT #{id}, #{menu.id} FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.dual
+		</foreach>
+	</insert>
+	
+	<delete id="deleteRoleOrg">
+		DELETE FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role_org WHERE role_id = #{id}
+	</delete>
+	
+	<insert id="insertRoleOrg">
+		INSERT INTO ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role_org(role_id, org_id)
+		<foreach collection="orgList" item="org" separator=" union all ">
+			SELECT #{id}, #{org.id} FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.dual
+		</foreach>
+	</insert>
+	
+	<update id="delete">
+		UPDATE ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_role SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

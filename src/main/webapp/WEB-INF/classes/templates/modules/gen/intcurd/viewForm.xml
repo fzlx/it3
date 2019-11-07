@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>viewForm</name>
+	<filePath>src/main/webapp/WEB-INF/views/${lastPackageName}/${moduleName}/${subModuleName}</filePath>
+	<fileName>${className}Form.jsp</fileName>
+	<content><![CDATA[
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/views/include/taglib.jsp"%>
+<meta name="decorator" content="pageform"/>
+<body>
+	<form id="${className}Form" name="${className}Form" action="javascript:void(0);" class="form form-horizontal">
+	   <input type="hidden"  name="id" value="${"$"}{${className}.id}" />	
+		<#list table.columnList as c>
+			<#if c.isEdit?? && c.isEdit == "1" && (c.isNotBaseField || c.simpleJavaField == 'remarks')>
+		<div class="form-group normal-form">
+			<label class="col-xs-12 col-sm-2 control-label  pl-0 pr-5">${c.comments}：</label>
+			<div class="col-xs-12 col-sm-7 pl-0">
+			<#if c.showType == "input">
+			    <input type="text" name="${c.javaFieldId}" value="${"$"}{${className}.${c.javaFieldId}}" placeholder="请输入${c.comments}" datatype="*" class="form-control input-text"/>
+			<#elseif c.showType == "textarea">
+		          <textarea class="form-control"  name="${c.javaFieldId}" style="height:100px;">${"$"}{${className}.${c.javaFieldId}}</textarea>
+			<#elseif c.showType == "select">
+				<select path="${c.javaFieldId}" class="input-xlarge ">
+					<option value="" label=""/>
+					<options items="${"$"}{fns:getDictList('${c.dictType}')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+				</select>
+			<#elseif c.showType == "checkbox">
+				<div class="checkbox checkbox-inline">
+				<input id="" type="checkbox" value="1" name="${c.javaFieldId}1" datatype="*">
+				<label for=""></label>
+			</div>
+			<div class="checkbox checkbox-inline">
+				<input id="" type="checkbox" value="2" name="${c.javaFieldId}2" datatype="*">
+				<label for=""></label>
+			</div>
+			<#elseif c.showType == "radiobox">			
+    		<div class="radio radio-inline">
+				<input id="" type="radio" value="1" name="${c.javaFieldId}" <c:if test="">checked="true"</c:if>>
+				<label for=""></label>
+			</div>
+			<div class="radio radio-inline">
+				<input id="" type="radio" value="2" name="${c.javaFieldId}" <c:if test="">checked="true"</c:if>>
+				<label for=""> </label>
+			</div>
+			<#elseif c.showType == "dateselect">
+				<input name="${c.javaFieldId}" type="text" readonly="readonly" maxlength="20" class="input-medium Wdate "
+					value="<fmt:formatDate value="${"$"}{${className}.${c.javaFieldId}}" pattern="yyyy-MM-dd HH:mm:ss"/>"
+					onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+			<#elseif c.showType == "userselect">
+				<sys:treeselect id="${c.simpleJavaField}" name="${c.javaFieldId}" value="${"$"}{${className}.${c.javaFieldId}}" labelName="${c.javaFieldName}" labelValue="${"$"}{${className}.${c.javaFieldName}}"
+					title="用户" url="/sys/office/treeData?type=3" cssClass="" allowClear="true" notAllowSelectParent="true"/>
+			<#elseif c.showType == "officeselect">
+				<sys:treeselect id="${c.simpleJavaField}" name="${c.javaFieldId}" value="${"$"}{${className}.${c.javaFieldId}}" labelName="${c.javaFieldName}" labelValue="${"$"}{${className}.${c.javaFieldName}}"
+					title="部门" url="/sys/office/treeData?type=2" cssClass="" allowClear="true" notAllowSelectParent="true"/>
+			<#elseif c.showType == "areaselect">
+				<sys:treeselect id="${c.simpleJavaField}" name="${c.javaFieldId}" value="${"$"}{${className}.${c.javaFieldId}}" labelName="${c.javaFieldName}" labelValue="${"$"}{${className}.${c.javaFieldName}}"
+					title="区域" url="/sys/area/treeData" cssClass="" allowClear="true" notAllowSelectParent="true"/>
+			<#elseif c.showType == "fileselect">
+				<hidden id="${c.simpleJavaField}" path="${c.javaFieldId}" htmlEscape="false"<#if c.dataLength != "0"> maxlength="${c.dataLength}"</#if> class="input-xlarge"/>
+				<sys:ckfinder input="${c.simpleJavaField}" type="files" uploadPath="/${moduleName}<#if subModuleName != "">/${subModuleName}</#if>/${className}" selectMultiple="true"/>
+			</#if>
+			</div>
+			<div class="col-xs-12 col-sm-3 valid-msg"></div>
+		</div>
+			</#if>
+		</#list>
+		</form>
+		<div class="form-group normal-form">
+			<label class="col-xs-12 col-sm-2 control-label pl-0 pr-5"></label>
+			<div class="col-xs-12 col-sm-7 pl-0 col-md-offset-2">
+				<shiro:hasPermission name="${permissionPrefix}:edit">
+					<button id="formSaveBtn" class="btn btn-primary">保存内容</button>
+					<input id="formCancelBtn" class="btn btn-white" type="button" value="取消">
+				</shiro:hasPermission>
+			</div>
+			<div class="col-xs-12 col-sm-3 valid-msg"></div>
+		</div>
+	<script type="text/javascript">
+		$(function(){
+			${className}Svc = {
+				url: {
+					save${ClassName} : rootPath + "/${urlPrefix}/save?t="+new Date().getTime()
+				},
+				fnCommit: function(){
+					var saveJson = Svc.formToJson($("#${className}Form"));
+		        	Svc.AjaxJson.post(${className}Svc.url.save${ClassName},saveJson,function(response){
+		        		if(response == true){
+		        			layer.alert('保存成功！',function(index){
+		        				$('#datatables_${ClassName}').dataTable().fnDraw();
+		        				layer.close(index);
+		        				API.fnHideForm('${className}LayerForm');
+		        			});
+		        		}
+		        	});
+				},
+				fnRegisterEvent: function(){
+					// 取消按钮
+					$('#formCancelBtn').click(function(){
+						API.fnHideForm('${className}LayerForm');
+					});
+					// 保存按钮
+					$('#formSaveBtn').click(function(){
+						${className}Svc.fnCommit();
+				    });
+				}
+			};
+			${className}Svc.fnRegisterEvent();
+		});
+	</script>
+</body>]]>
+	</content>
+</template>

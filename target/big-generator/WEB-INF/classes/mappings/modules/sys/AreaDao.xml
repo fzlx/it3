@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it313.big.modules.sys.dao.AreaDao">
+    
+	<sql id="areaColumns">
+		a.id,
+		a.parent_id AS "parent.id",
+		a.code,
+		a.name,
+		a.sort,
+		a.type,
+		a.remarks,
+		a.create_by AS "createBy.id",
+		a.create_time,
+		a.update_by AS "updateBy.id",
+		a.update_time,
+		a.del_flag,
+		p.name AS "parent.name"
+	</sql>
+	
+	<sql id="areaJoins">
+		LEFT JOIN ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area p ON p.id = a.parent_id
+    </sql>
+    
+	<select id="get" resultType="Area">
+		SELECT
+			<include refid="areaColumns"/>
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area a
+		<include refid="areaJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Area">
+		SELECT
+			<include refid="areaColumns"/>
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area a
+		<include refid="areaJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		<!-- 数据范围过滤 -->
+		${sqlMap.dsf}
+		OR a.id = #{currentUser.org.area.id}
+		ORDER BY a.code
+	</select>
+	
+	<select id="findAllList" resultType="Area">
+		SELECT
+			<include refid="areaColumns"/>
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area a
+		<include refid="areaJoins"/>
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		ORDER BY a.code
+	</select>
+	
+	<select id="findByParentIdsLike" resultType="Area">
+		SELECT
+			a.id,
+			a.parent_id AS "parent.id"
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area a
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} 
+		ORDER BY a.code
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area(
+			id, 
+			parent_id, 
+			code, 
+			name, 
+			sort,
+			type, 
+			create_by, 
+			create_time, 
+			update_by, 
+			update_time, 
+			remarks, 
+			del_flag
+		) VALUES (
+			#{id}, 
+			#{parent.id}, 
+			#{code}, 
+			#{name}, 
+			#{sort}, 
+			#{type}, 
+			#{createBy.id}, 
+			#{createTime}, 
+			#{updateBy.id}, 
+			#{updateTime}, 
+			#{remarks}, 
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area SET 
+			parent_id = #{parent.id}, 
+			code = #{code}, 
+			name = #{name}, 
+			sort = #{sort}, 
+			type = #{type}, 
+			update_by = #{updateBy.id}, 
+			update_time = #{updateTime}, 
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="updateParentIds">
+		UPDATE ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area SET 
+			parent_id = #{parent.id}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	<!-- 组织机构树 -->
+	<sql id="treeColumns">
+		a.id,
+		a.parent_id AS "parent.id",
+		a.code,
+		a.name,
+		a.sort,
+		a.type,
+		a.remarks,
+		a.create_by AS "createBy.id",
+		a.create_time,
+		a.update_by AS "updateBy.id",
+		a.update_time,
+		a.del_flag,
+		a.left_value,
+		a.right_value,
+		a.layer,
+		a.state
+	</sql>
+	<!-- * 查找左兄弟节点
+	 * @param idx 若查找左兄弟节点，则为当前节点的左值；否则为当前节点的右值
+	 * @param layer 节点所在层次
+	 * @return 找到的节点，若找不到，则返回null -->
+	<select id="findLeftBrotherTree" resultType="Area">
+		SELECT
+			<include refid="treeColumns"/>
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area a
+		WHERE a.left_value=#{leftValue} 
+		AND A.layer=#{layer}
+	</select>
+	<!-- * 查找右兄弟节点
+	 * @param idx 若查找左兄弟节点，则为当前节点的左值；否则为当前节点的右值
+	 * @param layer 节点所在层次
+	 * @return 找到的节点，若找不到，则返回null -->
+	<select id="findRightBrotherTree" resultType="Area">
+		SELECT
+			<include refid="treeColumns"/>
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area a
+		WHERE a.right_value=#{rightValue} 
+		AND A.layer=#{layer}
+	</select>
+	<!-- 通过ID找到节点信息 -->
+	<select id="findNodeTree" resultType="Area">
+		SELECT
+			<include refid="treeColumns"/>
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area a
+		WHERE a.id=#{id}
+	</select>
+	<!-- 获取整棵树最大的右值 -->
+	<select id="getMaxRightTree" resultType="Integer">
+		SELECT
+			MAX(a.right_value)
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area a
+	</select>
+	<!-- 将右边的节点移动几个位置，腾出空间给新元素
+	 * @param baseLeft 基准左值
+	 * @param baseRight 基准右值
+	 * @param step 移动几位 -->
+	<update id="shiftRightNodeTree">
+		UPDATE ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area SET 
+			left_value = left_value+2*#{step}, 
+			right_value = right_value+2*#{step}
+		WHERE left_value &gt; #{baseLeft} and right_value &gt; #{baseRight}
+	</update>
+	<!-- * 调整某个节点的容量,以适应新的大小
+	 * @param baseLeft 需要调整的节点的左值
+	 * @param baseRight 需要调整的节点的右值
+	 * @param n 元素数量 -->
+	<update id="resizeTree">
+		UPDATE ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area SET 
+			right_value = right_value+2*#{n}
+		WHERE left_value &lt;= #{baseLeft} and right_value &gt;=#{baseRight}
+	</update>
+	 <!--@param node 节点信息
+	  @param layerDistance 层次距离
+	 @param distance 移动距离  修改单个节点信息 -->
+	<update id="shiftTree">
+		UPDATE ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area SET 
+			left_value = left_value+#{distance}, 
+			right_value = right_value+#{distance},
+			layer = layer+#{layerDelta}
+		WHERE left_value &gt;= #{baseLeft} and right_value &lt;=#{baseRight}
+	</update>
+	<!--  删除基准节点,包括所有子节点 -->
+	<update id="deleteTree">
+		DELETE FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_area  
+		WHERE left_value &gt;= #{baseLeft} and right_value &lt;=#{baseRight}
+	</update>
+</mapper>

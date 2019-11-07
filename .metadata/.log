@@ -1,0 +1,245 @@
+!SESSION 2019-11-06 23:55:35.045 -----------------------------------------------
+eclipse.buildId=16.0.0.CI-004
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.ui 2 0 2019-11-06 23:57:46.958
+!MESSAGE Warnings while parsing the images from the 'org.eclipse.ui.commandImages' extension point.
+!SUBENTRY 1 org.eclipse.ui 2 0 2019-11-06 23:57:46.958
+!MESSAGE Cannot bind to an undefined command: plug-in='com.genuitec.eclipse.theming.ui', id='com.genuitec.myeclipse.help.darktheme.commandid'
+
+!ENTRY com.genuitec.eclipse.theming.ui 1 0 2019-11-06 23:57:48.577
+!MESSAGE A DevStyle Theme is being activated on this workspace; preparing colors and configuration
+
+!ENTRY com.genuitec.eclipse.theming.ui 1 0 2019-11-06 23:57:48.591
+!MESSAGE DevStyle has archived current color configurations to alternate preferences - will be restored when switching out of the DevStyle Theme
+
+!ENTRY org.eclipse.jface 2 0 2019-11-06 23:57:49.489
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-11-06 23:57:49.489
+!MESSAGE A conflict occurred for CTRL+SHIFT+Z:
+Binding(CTRL+SHIFT+Z,
+	ParameterizedCommand(Command(org.eclipse.angularjs.ui.navigate.open.angular.element,Open Angular Element,
+		Opens an Angular Element in a JavaScript editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2604e76,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+Z,
+	ParameterizedCommand(Command(org.skyway.core.ui.generate,Generate,
+		Generate with Skyway,
+		Category(org.skyway.core.ui.category.views,Window,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@786a4eb2,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-11-06 23:57:49.489
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@607fa188,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2fe235b4,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-11-06 23:57:49.489
+!MESSAGE A conflict occurred for CTRL+SHIFT+V:
+Binding(CTRL+SHIFT+V,
+	ParameterizedCommand(Command(net.jeeeyul.pdetools.clipboard.pasteHistory,Paste Content in History,
+		,
+		Category(net.jeeeyul.pdetools.category,PDE Tools,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2f71cdc0,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+V,
+	ParameterizedCommand(Command(org.eclipse.jdt.debug.ui.command.OpenFromClipboard,Open from Clipboard,
+		Opens a Java element or a Java stack trace from clipboard,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@5440942,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+V,
+	ParameterizedCommand(Command(org.skyway.core.ui.validate,Validate,
+		Run Skyway Validation,
+		Category(org.skyway.core.ui.category.views,Window,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@18aa9b83,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.jface.text 2 0 2019-11-06 23:57:53.388
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-06 23:58:10.758
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\html\css_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-06 23:58:10.808
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\html\forms_lists_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-06 23:58:10.825
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\html\htmlform_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-06 23:58:10.842
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\html\html_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-06 23:58:10.860
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\html\javascript_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-06 23:58:10.881
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\jsp\jsf_f_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-06 23:58:10.900
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\jsp\jsf_h_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-06 23:58:10.915
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\jsp\struts_bean_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-06 23:58:10.935
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\jsp\struts_html_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-06 23:58:10.962
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\jsp\struts_logic_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-06 23:58:10.983
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\jsp\struts_tiles_snippets.xml
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-11-06 23:58:11.097
+!MESSAGE Removing part descriptor with the 'com.genuitec.eclipse.modeling.ui.OverviewView' id and the 'JSF Flow Overview' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+!SESSION 2019-11-07 00:04:03.858 -----------------------------------------------
+eclipse.buildId=16.0.0.CI-004
+java.version=11.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=zh_CN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2019-11-07 00:06:25.283
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.ui 2 0 2019-11-07 00:06:28.974
+!MESSAGE Warnings while parsing the images from the 'org.eclipse.ui.commandImages' extension point.
+!SUBENTRY 1 org.eclipse.ui 2 0 2019-11-07 00:06:28.974
+!MESSAGE Cannot bind to an undefined command: plug-in='com.genuitec.eclipse.theming.ui', id='com.genuitec.myeclipse.help.darktheme.commandid'
+
+!ENTRY org.eclipse.jface 2 0 2019-11-07 00:06:31.325
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-11-07 00:06:31.325
+!MESSAGE A conflict occurred for CTRL+SHIFT+Z:
+Binding(CTRL+SHIFT+Z,
+	ParameterizedCommand(Command(org.eclipse.angularjs.ui.navigate.open.angular.element,Open Angular Element,
+		Opens an Angular Element in a JavaScript editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@34d5d5f7,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+Z,
+	ParameterizedCommand(Command(org.skyway.core.ui.generate,Generate,
+		Generate with Skyway,
+		Category(org.skyway.core.ui.category.views,Window,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@17eac1b5,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-11-07 00:06:31.325
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1d88414a,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7cd6e9dd,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-11-07 00:06:31.325
+!MESSAGE A conflict occurred for CTRL+SHIFT+V:
+Binding(CTRL+SHIFT+V,
+	ParameterizedCommand(Command(net.jeeeyul.pdetools.clipboard.pasteHistory,Paste Content in History,
+		,
+		Category(net.jeeeyul.pdetools.category,PDE Tools,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@6636e1dd,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+V,
+	ParameterizedCommand(Command(org.eclipse.jdt.debug.ui.command.OpenFromClipboard,Open from Clipboard,
+		Opens a Java element or a Java stack trace from clipboard,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@279063c7,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+V,
+	ParameterizedCommand(Command(org.skyway.core.ui.validate,Validate,
+		Run Skyway Validation,
+		Category(org.skyway.core.ui.category.views,Window,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@784df46e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY com.genuitec.eclipse.core 4 0 2019-11-07 00:06:34.686
+!MESSAGE Activation Error: Cannot decode server response, likely due to only partial entry: Decryption error
+
+!ENTRY com.genuitec.eclipse.core 4 0 2019-11-07 00:06:34.688
+!MESSAGE Error: invalid activation-data in license file; activation is invalidated
+
+!ENTRY org.eclipse.jface.text 2 0 2019-11-07 00:06:36.163
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-11-07 00:06:43.797
+!MESSAGE Removing part descriptor with the 'com.genuitec.eclipse.modeling.ui.OverviewView' id and the 'JSF Flow Overview' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-07 00:06:52.816
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\html\css_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-07 00:06:52.824
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\html\forms_lists_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-07 00:06:52.827
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\html\htmlform_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-07 00:06:52.831
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\html\html_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-07 00:06:52.834
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\html\javascript_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-07 00:06:52.844
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\jsp\jsf_f_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-07 00:06:52.849
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\jsp\jsf_h_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-07 00:06:52.851
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\jsp\struts_bean_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-07 00:06:52.855
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\jsp\struts_html_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-07 00:06:52.861
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\jsp\struts_logic_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2019-11-07 00:06:52.864
+!MESSAGE Installed snippet library: D:\DevInstall\ide\myeclipse\configuration\org.eclipse.osgi\176\0\.cp\snippets\jsp\struts_tiles_snippets.xml

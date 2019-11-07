@@ -1,0 +1,231 @@
+/* Breadcrumb */
+.content-header {
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    width: auto;
+}
+.contabs {
+	background-color: #fff;
+    height: 40px;
+    line-height: 41px;
+    overflow: hidden;
+	/* border-bottom: 1px solid #c6c6c6; */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+}
+.mmc.main-position-fixed .contabs {
+    left: 56px;
+}
+.mg-left5{margin-left: 5px;}
+.mg-left10{margin-left: 10px;}
+
+.contabs a {
+	padding: 0 18px 0 18px;
+	display: inline-block;
+	background: #fafafa;
+	color: #989898;
+	font-size: 12px;
+	float: left;
+    border-right: 1px solid #dfdfdf;
+	transition: all 0.2s;
+}
+/* 不选中的时候显示 */
+.J_menuTabs .active{
+	background: #2E363F !important;
+	color: #CCC !important;
+	transition: all 0.3s;
+}
+.J_menuTabs .active:hover{
+	color: #FFF !important;
+	transition: all 0.3s;
+}
+.contabs button{
+	position: absolute;
+	top: 0;
+	display: block;
+	width: 40px;
+	height: 40px;
+	font-size: 14px;
+	color: #989898; 
+	border-right: 1px solid #dfdfdf;
+	transition: all 0.3s;
+	border: 0;
+	background: #fafafa;
+	outline: none;
+}
+.contabs .tab-btn-left{
+	left: 0;
+	border-right: 1px solid #dfdfdf;
+}
+.contabs .tab-btn-refresh{
+	border-left: 1px solid #dfdfdf;
+    right: 120px;
+}
+.menu-on-top .contabs .tab-btn-refresh{
+    right: 85px;
+}
+.contabs .Btn-to-right{
+	border-left: 1px solid #dfdfdf;
+	border-right: 0;
+	right: 160px;
+}
+.menu-on-top .contabs .Btn-to-right{
+	right: 125px;
+}
+.contabs .Btn-right-function{
+	position: absolute;
+	top: 0;
+	right: 35px;
+	width: 85px;
+	font-size: 12px;
+}
+.menu-on-top .contabs .Btn-right-function{
+	right: 0;
+}
+.contabs .Btn-right-function > button{
+	border-left: 1px solid #dfdfdf;
+	width: 85px;
+	font-size: 12px;
+}
+.contabs .Btn-right-function > button > i{
+	font-size: 12px;
+	margin-left: 5px;
+}
+.contabs .Btn-right-function .dropdown-menu{
+    display: block;
+    float: left;
+    font-size: 12px;
+    right: 10px;
+    padding: 0;
+    position: absolute;
+    top: 40px;
+    z-index: 1000;
+    border-radius: 0;
+}
+.contabs .Btn-right-function .dropdown-menu-right {
+  /*  left: auto;*/
+}
+.page-tabs-content {
+    float: left;
+}
+.dropdown-menu{
+    background-color: #fff;
+    overflow: hidden;
+    border: 1px solid #c6c6c6;
+}
+.dropdown-menu > li{
+	overflow: hidden;
+}
+.dropdown-menu > li > a{
+	display: block;
+    padding: 3px 20px;
+    clear: both;
+    /*border-radius: 3px;*/
+    color: inherit;
+    line-height: 25px;
+    margin: 4px;
+    text-align: left;
+    font-weight: 400;
+    background-color: #fff;
+    border-right: 0;
+    width: 124px;
+    color: #999999;
+}
+.dropdown-menu .divmargin {
+    height: 1px;
+    margin: 5px 0;
+    background-color: #e5e5e5;
+}
+
+.contabs button:hover{
+	background: #e4e4e4;
+	transition: all 0.3s;
+	color: #333;
+}
+.contabs .nav-tabs{
+	overflow: hidden;
+	width: 99999px;
+	margin-left: 40px;
+}
+.contabs a:hover {
+	background: #e4e4e4;
+	color: #666;
+}
+.contabs a:last-child {
+	background-image:none;
+}
+.contabs a.current {
+	font-weight: bold;
+	color: #444444;
+}
+.nav-main i {
+	padding: 0 0 0 8px;
+	font-size: 14px;
+}
+.nav-main i:hover {
+	opacity: 1;
+	color: #ff8585;
+}
+
+/*  内嵌页面  */
+.J_mainContent{
+	height: calc(100% - 122px);
+	overflow: hidden;
+}
+
+/* 侧边栏   */
+.sidebar-right{
+	position: fixed;
+	right: 0;
+	top: 66px;
+	bottom: 0;
+	z-index: 200;
+	overflow: hidden;
+	width: 280px!important;
+	background: #FFF;
+	border-left: 1px solid #c6c6c6;
+	transition: all .3s;
+	right: -301px;
+}
+.box {
+	position: relative;
+	width: auto;
+	height: 100%;
+	overflow: hidden;
+}
+.tab_menu {
+	overflow: hidden;
+}
+.tab_menu li {
+	width: 100%;
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	color: #fff;
+	background: #2e363f;
+	text-align: center;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 600;
+}
+.tab_menu li.current {
+	color: #333;
+	background: #fff;
+}
+.tab_menu li a {
+	color: #fff;
+	text-decoration: none;
+}
+.tab_menu li.current a {
+	color: #333;
+}
+.tab_box {
+	height: 100%;
+    overflow: hidden;
+}
+.tab_box .padding10{
+	padding-bottom: 20px;
+}
+.tab_box .hide {
+	display: none;
+}

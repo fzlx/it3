@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>service</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/service/${subModuleName}</filePath>
+	<fileName>${ClassName}Service.java</fileName>
+	<content><![CDATA[
+/**
+ * Copyright &copy; 2012-2018 <a href="http://www.it313.cn">big-generator</a> All rights reserved.
+ */
+package ${packageName}.${moduleName}.service<#if subModuleName != "">.${subModuleName}</#if>;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.it313.big.common.persistence.Page;
+import com.it313.big.common.utils.StringUtils;
+import com.it313.big.common.service.CrudService;
+import ${packageName}.${moduleName}.entity<#if subModuleName != "">.${subModuleName}</#if>.${ClassName};
+import ${packageName}.${moduleName}.dao<#if subModuleName != "">.${subModuleName}</#if>.${ClassName}Dao;
+
+/**
+ * ${functionName}Service
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+@Service
+@Transactional(readOnly = true)
+public class ${ClassName}Service extends CrudService<${ClassName}Dao, ${ClassName}> {
+
+     /**
+      * 查询单个
+      * @param id
+      */
+	public ${ClassName} get(String id) {
+		return super.get(id);
+	}
+	
+	/**
+	 * 遍历列表
+	 * @param ${className}
+	 */
+	public List<${ClassName}> findList(${ClassName} ${className}) {
+		return super.findList(${className});
+	}
+	
+	public Page<${ClassName}> findPage(Page<${ClassName}> page, ${ClassName} ${className}) {
+		return super.findPage(page, ${className});
+	}
+	
+	/**
+	 * 保存数据
+	 * @param ${className}
+	 */
+	@Transactional(readOnly = false)
+	public void save(${ClassName} ${className}) {
+		if(${className} != null && StringUtils.isNotBlank(${className}.getId())){
+			dao.update(${className});
+		} else {
+			${className}.preInsert();
+			dao.insert(${className});
+		}
+	}
+
+	/**
+	 * 批量删除数据
+	 * @param ${className}
+	 */
+	@Transactional(readOnly = false)
+	public void delete( List<${ClassName}> ${className}) {
+		dao.batchDelete(${className});
+	}
+	
+}]]>
+	</content>
+</template>

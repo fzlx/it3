@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>iservice</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/common/${subModuleName}</filePath>
+	<fileName>I${ClassName}Service.java</fileName>
+	<content><![CDATA[
+/**
+ * Copyright &copy; 2012-2018 <a href="http://www.it313.cn">big-generator</a> All rights reserved.
+ */
+package ${packageName}.${moduleName}.common<#if subModuleName != "">.${subModuleName}</#if>;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import ${packageName}.${moduleName}.entity<#if subModuleName != "">.${subModuleName}</#if>.${ClassName};
+
+
+/**
+ * ${functionName}Service
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+
+public interface I${ClassName}Service {
+
+     /**
+      * 查询单个
+      * @param id
+      */
+	public ${ClassName} get(Long id);
+	
+	/**
+	 * 遍历列表
+	 * @param ${className}
+	 */
+	public List<${ClassName}> findList(${ClassName} ${className});
+	
+	
+	/**
+	 * 保存数据
+	 * @param ${className}
+	 */
+
+	public void save(${ClassName} ${className});
+
+	/**
+	 * 批量删除数据
+	 * @param ${className}
+	 */
+	public void delete( List<${ClassName}> ${className});
+	
+	/**
+	 * 批量 插入数据
+	 * @param ${className}List
+	 */
+	public void batchSave(List<${ClassName}> ${className}List);
+	
+}]]>
+	</content>
+</template>

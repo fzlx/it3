@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="big-generator:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>big-generator</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="big-generator.war">
+      <element id="artifact" artifact-name="big-generator:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>controller</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/web/${subModuleName}</filePath>
+	<fileName>${ClassName}Controller.java</fileName>
+	<content><![CDATA[
+/**
+ * Copyright &copy; 2010-2018 <a href="http://www.it313.cn">big-generator</a> All rights reserved.
+ */
+package ${packageName}.${moduleName}.web<#if subModuleName != "">.${subModuleName}</#if>;
+
+import java.util.List;
+
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.it313.big.common.persistence.paginate.Paginate;
+import com.it313.big.common.web.BaseController;
+import com.it313.big.common.utils.StringUtils;
+import ${packageName}.${moduleName}.entity<#if subModuleName != "">.${subModuleName}</#if>.${ClassName};
+import ${packageName}.${moduleName}.service<#if subModuleName != "">.${subModuleName}</#if>.${ClassName}Service;
+
+/**
+ * ${functionName}Controller
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+@Controller
+@RequestMapping(value = "${r"${adminPath}"}/${urlPrefix}")
+public class ${ClassName}Controller extends BaseController {
+
+	@Autowired
+	private ${ClassName}Service ${className}Service;
+	
+	/**
+	 * 跳转页
+	 * @param ${className}
+	 * @param model
+	 * @return
+	 */
+	@RequiresPermissions("${permissionPrefix}:view")
+	@RequestMapping(value = {"${className}List", ""})
+	public String indexList(${ClassName} ${className}, Model model) {
+		return "${lastPackageName}/${viewPrefix}List";
+	}
+	
+	/**
+	 * 遍历列表
+	 * @param ${className}
+	 * @return
+	 */
+	@RequiresPermissions("${permissionPrefix}:view")
+	@RequestMapping(value = {"list", ""})
+	@ResponseBody
+	public Object list(@RequestBody ${ClassName} ${className}) {
+	    this.setPageParams(${className}.getPaginate()); // 核心分页代码 
+		List<${ClassName}> list = ${className}Service.findList(${className});
+		Paginate<${ClassName}> page = new Paginate<${ClassName}>(list, ${className}.getPaginate().getMenuId());
+		return page;
+	}
+    
+    /**
+     * 修改页面
+     * @param ${className}
+     * @param model
+     * @return
+     */
+	@RequiresPermissions("${permissionPrefix}:view")
+	@RequestMapping(value = "form")
+	public String form(${ClassName} ${className}, Model model) {
+	   if(${className}!=null && StringUtils.isNotBlank(${className}.getId())){
+			${className} = ${className}Service.get(${className});
+			model.addAttribute("${className}", ${className});
+		}
+		return "${lastPackageName}/${viewPrefix}Form";
+	}
+	
+    /**
+     * 保存数据
+     * @param ${className}
+     * @param model
+     * @param redirectAttributes
+     * @return
+     */
+	@RequiresPermissions("${permissionPrefix}:edit")
+	@RequestMapping(value = "save")
+	@ResponseBody
+	public Object save(@RequestBody ${ClassName} ${className}, Model model, RedirectAttributes redirectAttributes) {
+	try {
+			${className}Service.save(${className});
+		} catch (Exception e) {
+			return setErrorMsg("操作失败！");
+		}
+		return Boolean.TRUE;
+	}
+	
+	/**
+	 * 删除页面
+	 * @param ${className}
+	 * @param redirectAttributes
+	 * @return
+	 */
+	@RequiresPermissions("${permissionPrefix}:edit")
+	@RequestMapping(value = "delete")
+	@ResponseBody
+	public Object delete(@RequestBody List<${ClassName}> ${className}, RedirectAttributes redirectAttributes) {
+	    ${className}Service.delete(${className});
+		return Boolean.TRUE;
+	}
+}]]>
+	</content>
+</template>

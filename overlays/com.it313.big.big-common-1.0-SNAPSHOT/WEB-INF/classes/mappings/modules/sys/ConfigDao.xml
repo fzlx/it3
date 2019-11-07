@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.it313.big.modules.sys.dao.ConfigDao">
+    
+	<select id="findList" resultType="Config">
+		SELECT 
+			a.*
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_config a WHERE 1=1
+		<if test="configType != null and configType != ''">
+			AND a.config_type = #{configType}
+		</if>
+		<if test="configKey != null and configKey != ''">
+			AND a.config_key = #{configKey}
+		</if>
+		ORDER BY a.order_by asc
+	</select>
+	<select id="findConfigTypeGroup" resultType="Config">
+		SELECT 
+			a.*
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_config a
+		GROUP BY a.config_type,a.config_type_name
+	</select>
+	
+	<select id="getConfig" resultType="Config">
+		SELECT 
+			a.*
+		FROM ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_config a
+		WHERE config_type = #{configType} AND config_key = #{configKey} 
+		<if test="dbName == 'mysql'">limit 1</if>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_config(
+			`id`,
+			`config_type`,
+			`config_type_name`,
+			`config_key`,
+			`config_key_name`,
+			`config_key_value`,
+			`input_type`,
+			`input_text`,
+			`input_value`,
+			`is_required`,
+			`regex`,
+			`prompt`,
+			`remarks`
+		) VALUES (
+			#{id}, 
+			#{configType}, 
+			#{configTypeName}, 
+			#{configKey}, 
+			#{configKeyName}, 
+			#{configKeyValue}, 
+			#{inputType}, 
+			#{inputText}, 
+			#{inputValue}, 
+			#{isRequired}, 
+			#{regex}, 
+			#{prompt}, 
+			#{remarks}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_config SET 
+			config_type = #{configType}, 
+			config_type_name = #{configTypeName}, 
+			config_key = #{configKey}, 
+			config_key_name = #{configKeyName}, 
+			config_key_value = #{configKeyValue}, 
+			input_type = #{inputType}, 
+			input_text = #{inputText}, 
+			input_value = #{inputValue}, 
+			is_required = #{isRequired}, 
+			regex = #{regex}, 
+			prompt = #{prompt}, 
+			order_by = #{orderBy}, 
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	<update id="updateValue">
+		UPDATE ${@com.it313.big.common.persistence.BaseEntity@BIG_COMMON_TP}.sys_config SET 
+			config_key_value = #{configKeyValue}
+		WHERE config_type = #{configType} AND config_key = #{configKey}
+	</update>
+</mapper>

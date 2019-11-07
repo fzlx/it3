@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.it313.big:big-common:api:1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/it313/big/big-common/1.0-SNAPSHOT/big-common-1.0-SNAPSHOT-api.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/it313/big/big-common/1.0-SNAPSHOT/big-common-1.0-SNAPSHOT-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/it313/big/big-common/1.0-SNAPSHOT/big-common-1.0-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
